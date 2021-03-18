@@ -1,0 +1,13 @@
+{
+  "skip_files": [
+    "lib/mangaroo.ex",
+    "lib/mangaroo_web.ex",
+    "lib/mangaroo/application.ex",
+    "lib/mangaroo/repo.ex",
+    "lib/mangaroo_web/endpoint.ex",
+    "lib/mangaroo_web/gettext.ex",
+    "lib/mangaroo_web/router.ex",
+    "lib/mangaroo_web/telemetry.ex",
+    "test/support"
+  ]
+}

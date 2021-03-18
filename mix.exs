@@ -10,7 +10,14 @@ defmodule Mangaroo.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -43,7 +50,8 @@ defmodule Mangaroo.MixProject do
       {:gettext, "0.18.2"},
       {:jason, "1.2.2"},
       {:plug_cowboy, "2.4.1"},
-      {:credo, "1.5.5", only: [:dev, :test], runtime: false}
+      {:credo, "1.5.5", only: [:dev, :test], runtime: false},
+      {:excoveralls, "0.13.4", only: :test}
     ]
   end
 
