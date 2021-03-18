@@ -1,5 +1,8 @@
 # Mangaroo
 
+[![gh-actions](https://github.com/read-mangaroo/server/workflows/Continuous%20Integration/badge.svg)](https://github.com/read-mangaroo/server/actions?workflow=Continuous+Integration)
+[![Coverage Status](https://coveralls.io/repos/github/read-mangaroo/server/badge.svg?branch=main)](https://coveralls.io/github/read-mangaroo/server?branch=main)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
