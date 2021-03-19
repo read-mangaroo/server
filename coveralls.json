@@ -4,10 +4,12 @@
     "lib/mangaroo_web.ex",
     "lib/mangaroo/application.ex",
     "lib/mangaroo/repo.ex",
+    "lib/mangaroo_web/channels/user_socket.ex",
     "lib/mangaroo_web/endpoint.ex",
     "lib/mangaroo_web/gettext.ex",
     "lib/mangaroo_web/router.ex",
     "lib/mangaroo_web/telemetry.ex",
+    "lib/mangaroo_web/views",
     "test/support"
   ]
 }

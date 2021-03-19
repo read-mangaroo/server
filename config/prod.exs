@@ -16,6 +16,12 @@ config :mangaroo, MangarooWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :mangaroo, Mangaroo.EventStore,
+  username: "${DB_USERNAME}",
+  password: "${DB_PASSWORD}",
+  database: "mangaroo_eventstore_prod",
+  hostname: "${DB_HOSTNAME}"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
