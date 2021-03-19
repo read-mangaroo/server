@@ -8,7 +8,8 @@
 use Mix.Config
 
 config :mangaroo,
-  ecto_repos: [Mangaroo.Repo]
+  ecto_repos: [Mangaroo.Repo],
+  event_stores: [Mangaroo.EventStore]
 
 # Configures the endpoint
 config :mangaroo, MangarooWeb.Endpoint,
@@ -25,6 +26,23 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :commanded, event_store_adapter: Commanded.EventStore.Adapters.EventStore
+
+config :commanded_ecto_projections, repo: Mangaroo.Repo
+
+config :mangaroo, Mangaroo.Commanded,
+  event_store: [
+    adapter: Commanded.EventStore.Adapters.EventStore,
+    event_store: Mangaroo.EventStore
+  ],
+  pub_sub: :local,
+  registry: :local
+
+config :mangaroo, Mangaroo.EventStore,
+  column_data_type: "jsonb",
+  serializer: EventStore.JsonbSerializer,
+  types: EventStore.PostgresTypes
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

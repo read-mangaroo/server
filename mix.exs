@@ -51,7 +51,11 @@ defmodule Mangaroo.MixProject do
       {:jason, "1.2.2"},
       {:plug_cowboy, "2.4.1"},
       {:credo, "1.5.5", only: [:dev, :test], runtime: false},
-      {:excoveralls, "0.13.4", only: :test}
+      {:excoveralls, "0.13.4", only: :test},
+      {:commanded, "1.2.0"},
+      {:eventstore, "1.2.3"},
+      {:commanded_eventstore_adapter, "1.2.0"},
+      {:commanded_ecto_projections, "1.2.1"}
     ]
   end
 
@@ -64,9 +68,21 @@ defmodule Mangaroo.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "ecto.setup": [
+        "ecto.create",
+        "ecto.migrate",
+        "event_store.create",
+        "event_store.init",
+        "run priv/repo/seeds.exs"
+      ],
+      "ecto.reset": ["ecto.drop", "event_store.drop", "ecto.setup"],
+      test: [
+        "ecto.create --quiet",
+        "ecto.migrate --quiet",
+        "event_store.create --quiet",
+        "event_store.init --quiet",
+        "test"
+      ],
       lint: ["format", "credo"]
     ]
   end

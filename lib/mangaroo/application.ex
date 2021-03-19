@@ -7,16 +7,11 @@ defmodule Mangaroo.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
+      Mangaroo.Commanded,
       Mangaroo.Repo,
-      # Start the Telemetry supervisor
       MangarooWeb.Telemetry,
-      # Start the PubSub system
-      {Phoenix.PubSub, name: Mangaroo.PubSub},
-      # Start the Endpoint (http/https)
-      MangarooWeb.Endpoint
-      # Start a worker by calling: Mangaroo.Worker.start_link(arg)
-      # {Mangaroo.Worker, arg}
+      MangarooWeb.Endpoint,
+      {Phoenix.PubSub, name: Mangaroo.PubSub}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
