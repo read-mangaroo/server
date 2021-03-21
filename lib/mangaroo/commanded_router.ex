@@ -4,4 +4,6 @@ defmodule Mangaroo.CommandedRouter do
   """
 
   use Commanded.Commands.CompositeRouter
+
+  router(Mangaroo.Concept.Content.Router)
 end

@@ -77,6 +77,8 @@ defmodule Mangaroo.MixProject do
       ],
       "ecto.reset": ["ecto.drop", "event_store.drop", "ecto.setup"],
       test: [
+        "ecto.drop --quiet",
+        "event_store.drop --quiet",
         "ecto.create --quiet",
         "ecto.migrate --quiet",
         "event_store.create --quiet",

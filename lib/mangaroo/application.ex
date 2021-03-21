@@ -8,6 +8,7 @@ defmodule Mangaroo.Application do
   def start(_type, _args) do
     children = [
       Mangaroo.Commanded,
+      Mangaroo.Concept.Content.Supervisor,
       Mangaroo.Repo,
       MangarooWeb.Telemetry,
       MangarooWeb.Endpoint,
