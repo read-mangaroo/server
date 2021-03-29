@@ -48,5 +48,6 @@ defmodule MangarooWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug CORSPlug, origin: &MangarooWeb.CorsOrigin.origin/0
   plug MangarooWeb.Router
 end

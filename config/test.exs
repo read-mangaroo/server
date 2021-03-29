@@ -30,3 +30,5 @@ config :mangaroo, MangarooWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :mangaroo, cors_origin: "http://localhost:3000"

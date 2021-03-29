@@ -3,10 +3,17 @@ defmodule MangarooWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug MangarooWeb.Graph.Context
   end
 
-  scope "/api", MangarooWeb do
+  scope "/api" do
     pipe_through :api
+
+    if Mix.env() == :dev do
+      forward "/graphiql", Absinthe.Plug.GraphiQL, schema: MangarooWeb.Graph.Schema
+    end
+
+    forward "/", Absinthe.Plug, schema: MangarooWeb.Graph.Schema
   end
 
   # Enables LiveDashboard only for development

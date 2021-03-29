@@ -24,6 +24,7 @@ defmodule Mangaroo.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Mangaroo.DataCase
+      import Mangaroo.Factories
     end
   end
 

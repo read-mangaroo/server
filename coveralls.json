@@ -7,6 +7,8 @@
     "lib/mangaroo_web/channels/user_socket.ex",
     "lib/mangaroo_web/endpoint.ex",
     "lib/mangaroo_web/gettext.ex",
+    "lib/mangaroo_web/graph/context.ex",
+    "lib/mangaroo_web/graph/schema.ex",
     "lib/mangaroo_web/router.ex",
     "lib/mangaroo_web/telemetry.ex",
     "lib/mangaroo_web/views",

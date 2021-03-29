@@ -23,6 +23,8 @@ defmodule MangarooWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import MangarooWeb.ConnCase
+      import MangarooWeb.AbsintheHelpers
+      import Mangaroo.Factories
 
       alias MangarooWeb.Router.Helpers, as: Routes
 
