@@ -55,7 +55,11 @@ defmodule Mangaroo.MixProject do
       {:commanded, "1.2.0"},
       {:eventstore, "1.2.3"},
       {:commanded_eventstore_adapter, "1.2.0"},
-      {:commanded_ecto_projections, "1.2.1"}
+      {:commanded_ecto_projections, "1.2.1"},
+      {:absinthe, "1.6.3"},
+      {:absinthe_plug, "1.5.5"},
+      {:crudry, "2.3.1"},
+      {:cors_plug, "2.0.3"}
     ]
   end
 

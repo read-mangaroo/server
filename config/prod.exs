@@ -22,6 +22,8 @@ config :mangaroo, Mangaroo.EventStore,
   database: "mangaroo_eventstore_prod",
   hostname: "${DB_HOSTNAME}"
 
+config :mangaroo, cors_origin: "${WEB_ORIGIN}"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

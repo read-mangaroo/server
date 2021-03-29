@@ -8,7 +8,7 @@ defmodule Mangaroo.Repo.Migrations.CreateMangas do
       add :author, :string, null: false
       add :artist, :string, null: false
       add :status, :string, null: false
-      add :demographic, :string, null: false
+      add :demographic, :string
       add :is_hentai, :boolean, default: false
       add :description, :text
 
