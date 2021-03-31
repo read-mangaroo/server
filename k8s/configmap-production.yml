@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map
+  namespace: server
+  labels:
+    environment: production
+    app: server
+data:
+  HOST: "api.mangaroo.moe"
+  PORT: "4000"
+  CORS_ORIGIN: "https://www.mangaroo.moe"
+  DB_CERT: "/app/certs/ca-certificate.crt"
+  EVENTSTORE_DB_CERT: "/app/certs/ca-certificate.crt"

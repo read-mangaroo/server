@@ -5,7 +5,7 @@ defmodule Mangaroo.MixProject do
     [
       app: :mangaroo,
       version: "0.0.0",
-      elixir: "1.11.4",
+      elixir: "1.11.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -17,6 +17,15 @@ defmodule Mangaroo.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
+      ],
+      releases: [
+        mangaroo: [
+          include_erts: true,
+          include_executables_for: [:unix],
+          applications: [
+            runtime_tools: :permanent
+          ]
+        ]
       ]
     ]
   end

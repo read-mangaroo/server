@@ -3,6 +3,7 @@
     "lib/mangaroo.ex",
     "lib/mangaroo_web.ex",
     "lib/mangaroo/application.ex",
+    "lib/mangaroo/release_tasks.ex",
     "lib/mangaroo/repo.ex",
     "lib/mangaroo_web/channels/user_socket.ex",
     "lib/mangaroo_web/endpoint.ex",

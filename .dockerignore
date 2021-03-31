@@ -1,0 +1,6 @@
+_build/dev
+_build/test
+.elixir_ls
+cover
+deps
+test
