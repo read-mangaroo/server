@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-staging
+  namespace: server
+  labels:
+    app: server
+    environment: staging
+spec:
+  selector:
+    matchLabels:
+      app: server
+      environment: staging
+  template:
+    metadata:
+      labels:
+        app: server
+        environment: staging
+    spec:
+      containers:
+        - name: mangaroo-server
+          image: <IMAGE>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: secrets-staging
+            - configMapRef:
+                name: config-map-staging
+          volumeMounts:
+            - name: dbcert
+              mountPath: /app/certs
+              readOnly: true
+      volumes:
+        - name: dbcert
+          secret:
+            secretName: db-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-staging
+  namespace: server
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 4000
+  selector:
+    app: server
+    environment: staging

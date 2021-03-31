@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map-staging
+  namespace: server
+  labels:
+    environment: staging
+    app: server
+data:
+  HOST: "staging-api.mangaroo.moe"
+  PORT: "4000"
+  CORS_ORIGIN: "https://staging.mangaroo.moe"
+  DB_CERT: "/app/certs/ca-certificate.crt"
+  EVENTSTORE_DB_CERT: "/app/certs/ca-certificate.crt"

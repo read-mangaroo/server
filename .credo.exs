@@ -29,7 +29,8 @@
           ~r"/_build/",
           ~r"/deps/",
           ~r"/node_modules/",
-          ~r"test/support"
+          ~r"test/support",
+          ~r"lib/mangaroo/release_tasks.ex"
         ]
       },
       #

@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         otp: [23.2.7]
-        elixir: [1.11.4]
+        elixir: [1.11.3]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -67,7 +67,7 @@ jobs:
     strategy:
       matrix:
         otp: [23.2.7]
-        elixir: [1.11.4]
+        elixir: [1.11.3]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -112,7 +112,7 @@ jobs:
     strategy:
       matrix:
         otp: [23.2.7]
-        elixir: [1.11.4]
+        elixir: [1.11.3]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
