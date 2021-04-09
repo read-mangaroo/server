@@ -16,6 +16,7 @@ defmodule MangarooWeb.Graph.Schema.Content do
     field(:demographic, :string)
     field(:is_hentai, :boolean)
     field(:description, :string)
+    field(:cover_art_url, :string)
   end
 
   input_object :create_manga_input do
@@ -26,6 +27,7 @@ defmodule MangarooWeb.Graph.Schema.Content do
     field(:demographic, :string)
     field(:is_hentai, :boolean)
     field(:description, :string)
+    field(:cover_art, :upload)
   end
 
   object :content_queries do

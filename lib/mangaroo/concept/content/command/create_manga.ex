@@ -3,6 +3,7 @@ defmodule Mangaroo.Concept.Content.Command.CreateManga do
   @behaviour Mangaroo.Behaviour.MangarooCommand
 
   use Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   alias __MODULE__
@@ -16,6 +17,7 @@ defmodule Mangaroo.Concept.Content.Command.CreateManga do
     field :demographic, :string
     field :is_hentai, :boolean, default: false
     field :description, :string
+    field :cover_art, :any, virtual: true
   end
 
   @required_attrs [
@@ -29,7 +31,8 @@ defmodule Mangaroo.Concept.Content.Command.CreateManga do
   @optional_attrs [
     :demographic,
     :is_hentai,
-    :description
+    :description,
+    :cover_art
   ]
 
   @accepted_status ~w(ongoing completed cancelled hiatus)
@@ -39,6 +42,7 @@ defmodule Mangaroo.Concept.Content.Command.CreateManga do
   def changeset(%CreateManga{} = create_manga, attrs \\ %{}) do
     create_manga
     |> cast(attrs, @required_attrs ++ @optional_attrs)
+    |> cast_attachments(attrs, [:cover_art])
     |> validate_required(@required_attrs)
     |> validate_inclusion(:status, @accepted_status)
     |> validate_inclusion(:demographic, @accepted_demographic)

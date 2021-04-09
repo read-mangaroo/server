@@ -68,7 +68,11 @@ defmodule Mangaroo.MixProject do
       {:absinthe, "1.6.3"},
       {:absinthe_plug, "1.5.5"},
       {:crudry, "2.3.1"},
-      {:cors_plug, "2.0.3"}
+      {:cors_plug, "2.0.3"},
+      {:ex_aws, "2.1.7"},
+      {:ex_aws_s3, "2.1.0"},
+      {:waffle, "1.1.4"},
+      {:waffle_ecto, "0.0.10"}
     ]
   end
 

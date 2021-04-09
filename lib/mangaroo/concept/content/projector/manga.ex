@@ -7,7 +7,7 @@ defmodule Mangaroo.Concept.Content.Projector.Manga do
     consistency: :strong
 
   alias Ecto.Multi
-  alias Mangaroo.Concept.Content.Event.MangaCreated
+  alias Mangaroo.Concept.Content.Event.{CoverArtUrlUpdated, MangaCreated}
   alias Mangaroo.Concept.Content.Schema.Manga
 
   project(%MangaCreated{} = event, fn multi ->
@@ -22,4 +22,14 @@ defmodule Mangaroo.Concept.Content.Projector.Manga do
       description: event.description
     })
   end)
+
+  project(%CoverArtUrlUpdated{} = event, fn multi ->
+    Multi.update_all(multi, :manga, manga_query(event.manga_uuid),
+      set: [cover_art_url: event.cover_art_url]
+    )
+  end)
+
+  defp manga_query(manga_uuid) do
+    from(m in Manga, where: m.uuid == ^manga_uuid)
+  end
 end
