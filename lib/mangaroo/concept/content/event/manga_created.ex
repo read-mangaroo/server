@@ -10,6 +10,9 @@ defmodule Mangaroo.Concept.Content.Event.MangaCreated do
     :status,
     :demographic,
     :is_hentai,
-    :description
+    :description,
+    :cover_art_content_type,
+    :cover_art_filename,
+    :cover_art_path
   ]
 end

@@ -10,6 +10,8 @@ defmodule Mangaroo.Concept.Content.Supervisor do
   @impl true
   def init(_init_arg) do
     children = [
+      Mangaroo.Concept.Content.EventHandler.MangaCreated,
+      Mangaroo.Concept.Content.ProcessManager.MangaCreated,
       Mangaroo.Concept.Content.Projector.Manga
     ]
 

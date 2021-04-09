@@ -28,6 +28,28 @@ defmodule Mangaroo.Concept.Content.Mutation.MangaTest do
       assert manga.description == "Test Manga Description"
     end
 
+    test "with valid data and cover art creates new Manga" do
+      attrs = %{
+        name: "Test Manga Name",
+        author: "Test Manga Author",
+        artist: "Test Manga Artist",
+        status: "ongoing",
+        demographic: "shounen",
+        description: "Test Manga Description",
+        cover_art: %Plug.Upload{
+          content_type: "image/png",
+          path: Path.expand("../../../../fixtures/cover_art_placeholder.png", __DIR__),
+          filename: "cover_art_placeholder.png"
+        }
+      }
+
+      {:ok, %Manga{} = manga} = MangaMutation.create(attrs)
+
+      assert manga.id
+      assert manga.uuid
+      assert manga.name == "Test Manga Name"
+    end
+
     test "with blank data returns errors" do
       {:error, %Ecto.Changeset{} = changeset} = MangaMutation.create(%{})
 

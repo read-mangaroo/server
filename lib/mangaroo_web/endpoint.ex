@@ -26,6 +26,13 @@ defmodule MangarooWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  if Mix.env() != :prod do
+    plug Plug.Static,
+      at: "/uploads",
+      from: Path.expand("./tmp/uploads"),
+      gzip: false
+  end
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
