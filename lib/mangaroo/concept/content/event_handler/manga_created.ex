@@ -35,6 +35,7 @@ defmodule Mangaroo.Concept.Content.EventHandler.MangaCreated do
 
   defp do_store_cover_art(:prod, id, content_type, filename, path) do
     # coveralls-ignore-start
+    File.mkdir_p!(Path.expand("tmp/multipart_cache"))
     tmp_path = Path.expand("tmp/multipart_cache/#{filename}")
     File.cp!(path, Path.expand(tmp_path))
 
