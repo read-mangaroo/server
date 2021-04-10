@@ -12,6 +12,7 @@ defmodule Mangaroo.ReleaseTasks do
 
     # migrate event store
     config = Mangaroo.EventStore.config()
+    :ok = EventStore.Tasks.Init.exec(config, [])
     :ok = EventStore.Tasks.Migrate.exec(config, [])
   end
 
@@ -24,13 +25,6 @@ defmodule Mangaroo.ReleaseTasks do
     for repo <- repos() do
       {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Mangaroo.ReleaseTasks.run_seed_for(&1))
     end
-  end
-
-  def init_event_store do
-    load_app()
-
-    config = Mangaroo.EventStore.config()
-    :ok = EventStore.Tasks.Init.exec(config, [])
   end
 
   def run_seed_for(repo) do

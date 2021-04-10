@@ -21,17 +21,47 @@ defmodule Mangaroo.Concept.Content.EventHandler.MangaCreated do
         _metadata
       ) do
     if content_type && filename && path do
-      cover_art = %Plug.Upload{
-        content_type: content_type,
-        filename: filename,
-        path: path
-      }
-
-      {status, _filename} = CoverArtUploader.store({cover_art, %{id: id}})
-
-      status
+      do_store_cover_art(Mix.env(), id, content_type, filename, path)
     else
       :ok
+    end
+  end
+
+  defp do_store_cover_art(:prod, id, content_type, filename, path) do
+    # coveralls-ignore-start
+    tmp_path = Path.expand("tmp/multipart_cache/#{filename}")
+    File.cp!(path, Path.expand(tmp_path))
+
+    cover_art = %Plug.Upload{
+      content_type: content_type,
+      filename: filename,
+      path: tmp_path
+    }
+
+    case CoverArtUploader.store({cover_art, %{id: id}}) do
+      {:ok, _} ->
+        File.rm!(tmp_path)
+
+      {:error, _} ->
+        :error
+    end
+
+    # coveralls-ignore-stop
+  end
+
+  defp do_store_cover_art(_env, id, content_type, filename, path) do
+    cover_art = %Plug.Upload{
+      content_type: content_type,
+      filename: filename,
+      path: path
+    }
+
+    case CoverArtUploader.store({cover_art, %{id: id}}) do
+      {:ok, _} ->
+        :ok
+
+      {:error, _} ->
+        :error
     end
   end
 end
