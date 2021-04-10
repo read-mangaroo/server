@@ -26,7 +26,7 @@ defmodule MangarooWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
-  if Mix.env() != :prod do
+  if Application.get_env(:mangaroo, :environment) != :prod do
     plug Plug.Static,
       at: "/uploads",
       from: Path.expand("./tmp/uploads"),
