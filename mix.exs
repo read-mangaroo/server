@@ -72,7 +72,9 @@ defmodule Mangaroo.MixProject do
       {:ex_aws, "2.1.7"},
       {:ex_aws_s3, "2.1.0"},
       {:waffle, "1.1.4"},
-      {:waffle_ecto, "0.0.10"}
+      {:waffle_ecto, "0.0.10"},
+      {:hackney, "1.17.0"},
+      {:sweet_xml, "0.6.6"}
     ]
   end
 

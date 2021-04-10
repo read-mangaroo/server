@@ -32,10 +32,14 @@ spec:
             - name: dbcert
               mountPath: /app/certs
               readOnly: true
+            - name: multipart-cache
+              mountPath: /app/tmp/multipart_cache
       volumes:
         - name: dbcert
           secret:
             secretName: db-cert
+        - name: multipart-cache
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service

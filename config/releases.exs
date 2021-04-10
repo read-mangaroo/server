@@ -42,12 +42,12 @@ config :ex_aws,
   json_codec: Jason,
   access_key_id: System.fetch_env!("DO_SPACE_KEY"),
   secret_access_key: System.fetch_env!("DO_SPACE_SECRET"),
-  region: System.fetch_env!("DO_SPACE_REGION"),
-  s3: [
-    schema: "https://",
-    host: System.fetch_env!("DO_SPACE_ENDPOINT"),
-    region: System.fetch_env!("DO_SPACE_REGION")
-  ]
+  region: System.fetch_env!("DO_SPACE_REGION")
+
+config :ex_aws, :s3,
+  schema: "https://",
+  host: System.fetch_env!("DO_SPACE_ENDPOINT"),
+  region: System.fetch_env!("DO_SPACE_REGION")
 
 config :waffle,
   storage: Waffle.Storage.S3,
