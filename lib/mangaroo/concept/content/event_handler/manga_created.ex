@@ -21,7 +21,13 @@ defmodule Mangaroo.Concept.Content.EventHandler.MangaCreated do
         _metadata
       ) do
     if content_type && filename && path do
-      do_store_cover_art(Mix.env(), id, content_type, filename, path)
+      do_store_cover_art(
+        Application.get_env(:mangaroo, :environment),
+        id,
+        content_type,
+        filename,
+        path
+      )
     else
       :ok
     end

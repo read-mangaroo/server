@@ -33,7 +33,7 @@ defmodule Mangaroo.Concept.Content.ProcessManager.MangaCreated do
 
     # coveralls-ignore-start
     cover_art_url =
-      if Mix.env() == :prod do
+      if Application.get_env(:mangaroo, :environment) == :prod do
         cover_art_url
       else
         "http://localhost:4000/uploads#{cover_art_url}"

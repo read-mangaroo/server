@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :mangaroo, :environment, Mix.env()
+
 config :mangaroo,
   ecto_repos: [Mangaroo.Repo],
   event_stores: [Mangaroo.EventStore]
