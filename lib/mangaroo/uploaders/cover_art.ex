@@ -4,6 +4,7 @@ defmodule Mangaroo.Uploaders.CoverArt do
   use Waffle.Definition
 
   @versions [:original]
+  @acl :public_read
 
   # Override the bucket on a per definition basis:
   # def bucket do
