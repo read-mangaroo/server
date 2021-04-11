@@ -12,3 +12,4 @@ data:
   CORS_ORIGIN: "https://staging.mangaroo.moe"
   DB_CERT: "/app/certs/ca-certificate.crt"
   EVENTSTORE_DB_CERT: "/app/certs/ca-certificate.crt"
+  CDN_HOST: "https://staging-cdn.mangaroo.moe"
