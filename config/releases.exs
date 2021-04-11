@@ -51,4 +51,5 @@ config :ex_aws, :s3,
 
 config :waffle,
   storage: Waffle.Storage.S3,
-  bucket: System.fetch_env!("DO_SPACE_NAME")
+  bucket: System.fetch_env!("DO_SPACE_NAME"),
+  asset_host: System.fetch_env!("CDN_HOST")
