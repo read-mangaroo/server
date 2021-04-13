@@ -3,6 +3,8 @@ defmodule Mangaroo.Concept.Content.Schema.Manga do
 
   use Ecto.Schema
 
+  alias Mangaroo.Concept.Content.Schema.Chapter
+
   schema "manga" do
     field :uuid, :binary_id
     field :name, :string
@@ -13,6 +15,8 @@ defmodule Mangaroo.Concept.Content.Schema.Manga do
     field :is_hentai, :boolean, default: false
     field :description, :string
     field :cover_art_url, :string
+
+    has_many :chapters, Chapter
 
     timestamps()
   end

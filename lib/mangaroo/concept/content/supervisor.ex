@@ -12,6 +12,7 @@ defmodule Mangaroo.Concept.Content.Supervisor do
     children = [
       Mangaroo.Concept.Content.EventHandler.MangaCreated,
       Mangaroo.Concept.Content.ProcessManager.MangaCreated,
+      Mangaroo.Concept.Content.Projector.Chapter,
       Mangaroo.Concept.Content.Projector.Manga
     ]
 

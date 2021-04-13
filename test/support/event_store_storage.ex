@@ -31,6 +31,7 @@ defmodule Mangaroo.EventStoreStorage do
   defp truncate_readstore_tables do
     """
     TRUNCATE TABLE
+      chapters,
       manga,
       projection_versions
     RESTART IDENTITY;
