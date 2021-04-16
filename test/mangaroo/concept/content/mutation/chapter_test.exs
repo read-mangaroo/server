@@ -25,8 +25,8 @@ defmodule Mangaroo.Concept.Content.Mutation.ChapterTest do
       {:error, %Ecto.Changeset{} = changeset} = ChapterMutation.create(%{})
 
       assert Enum.count(changeset.errors) == 2
-      assert changeset.errors[:manga_id] ==  {"can't be blank", [validation: :required]}
-      assert changeset.errors[:name] ==  {"can't be blank", [validation: :required]}
+      assert changeset.errors[:manga_id] == {"can't be blank", [validation: :required]}
+      assert changeset.errors[:name] == {"can't be blank", [validation: :required]}
     end
   end
 end

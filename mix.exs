@@ -74,7 +74,8 @@ defmodule Mangaroo.MixProject do
       {:waffle, "1.1.4"},
       {:waffle_ecto, "0.0.10"},
       {:hackney, "1.17.0"},
-      {:sweet_xml, "0.6.6"}
+      {:sweet_xml, "0.6.6"},
+      {:dataloader, "1.0.8"}
     ]
   end
 
