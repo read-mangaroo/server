@@ -6,6 +6,8 @@ defmodule MangarooWeb.Graph.Schema do
   use Absinthe.Schema
 
   alias Crudry.Middlewares.TranslateErrors
+  alias Mangaroo.Concept.Content.Query.Chapter, as: ChapterQuery
+  alias Mangaroo.Concept.Content.Query.Manga, as: MangaQuery
 
   import_types(Absinthe.Type.Custom)
   import_types(Absinthe.Plug.Types)
@@ -26,5 +28,18 @@ defmodule MangarooWeb.Graph.Schema do
 
   def middleware(middleware, _field, _object) do
     middleware
+  end
+
+  def context(ctx) do
+    loader =
+      Dataloader.new()
+      |> Dataloader.add_source(:chapters, ChapterQuery.data())
+      |> Dataloader.add_source(:mangas, MangaQuery.data())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 end

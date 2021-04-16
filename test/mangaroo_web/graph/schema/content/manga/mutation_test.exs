@@ -1,4 +1,4 @@
-defmodule MangarooWeb.Graph.Schema.Content.MutationTest do
+defmodule MangarooWeb.Graph.Schema.Content.Manga.MutationTest do
   use MangarooWeb.ConnCase
 
   setup %{conn: conn} do

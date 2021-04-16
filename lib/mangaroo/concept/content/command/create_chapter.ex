@@ -24,7 +24,6 @@ defmodule Mangaroo.Concept.Content.Command.CreateChapter do
   def changeset(%CreateChapter{} = create_chapter, attrs \\ %{}) do
     create_chapter
     |> cast(attrs, @required_attrs)
-    # |> cast_attachments(attrs, [:file])
     |> validate_required(@required_attrs)
   end
 end

@@ -25,5 +25,9 @@ defmodule Mangaroo.Concept.Content.Query.Chapter do
     Dataloader.Ecto.new(Repo, query: &query/2)
   end
 
+  def query(Chapter, _params) do
+    from(c in Chapter, order_by: [desc: c.inserted_at])
+  end
+
   def query(queryable, _params), do: queryable
 end
