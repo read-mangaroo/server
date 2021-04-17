@@ -18,6 +18,7 @@ defmodule Mangaroo.Concept.Content.Query.ChapterTest do
       assert chapter.id
       assert chapter.uuid
       assert chapter.name == "Factory Chapter Name"
+      assert chapter.status == "pending"
     end
   end
 
@@ -31,6 +32,7 @@ defmodule Mangaroo.Concept.Content.Query.ChapterTest do
       assert chapter.id
       assert chapter.uuid
       assert chapter.name == "Factory Chapter Name"
+      assert chapter.status == "pending"
     end
 
     test "with non-existing id returns nil" do

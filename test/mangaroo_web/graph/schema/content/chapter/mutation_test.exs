@@ -19,10 +19,17 @@ defmodule MangarooWeb.Graph.Schema.Content.Chapter.MutationTest do
 
       manga = manga_fixture()
 
+      chapter_archive = %Plug.Upload{
+        content_type: "application/zip",
+        filename: "test chapter.zip",
+        path: Path.expand("../../../../../fixtures/test chapter.zip", __DIR__)
+      }
+
       variables = %{
         "input" => %{
           "name" => "Test Chapter Name",
-          "mangaId" => manga.id
+          "mangaId" => manga.id,
+          "chapterArchive" => "chapterArchive"
         }
       }
 
@@ -30,7 +37,9 @@ defmodule MangarooWeb.Graph.Schema.Content.Chapter.MutationTest do
         conn
         |> post(
           "/api",
-          query_skeleton(mutation, "CreateChapter", variables)
+          query: mutation,
+          variables: variables,
+          chapterArchive: chapter_archive
         )
         |> json_response(200)
 
