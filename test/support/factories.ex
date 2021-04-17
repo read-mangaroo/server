@@ -7,7 +7,12 @@ defmodule Mangaroo.Factories do
     attrs =
       Enum.into(attrs, %{
         manga_id: manga.id,
-        name: "Factory Chapter Name"
+        name: "Factory Chapter Name",
+        chapter_archive: %Plug.Upload{
+          content_type: "application/zip",
+          path: Path.expand("../fixtures/test\ chapter.zip", __DIR__),
+          filename: "test\ chapter.zip"
+        }
       })
 
     {:ok, chapter} = ChapterMutation.create(attrs)

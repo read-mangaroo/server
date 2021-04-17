@@ -34,6 +34,7 @@ defmodule MangarooWeb.Graph.Schema.Content do
   input_object :create_chapter_input do
     field(:name, non_null(:string))
     field(:manga_id, non_null(:id))
+    field(:chapter_archive, :upload)
   end
 
   input_object :create_manga_input do

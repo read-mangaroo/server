@@ -8,6 +8,7 @@ defmodule Mangaroo.Concept.Content.Schema.Chapter do
   schema "chapters" do
     field :uuid, :binary_id
     field :name, :string
+    field :status, :string
 
     belongs_to :manga, Manga
 

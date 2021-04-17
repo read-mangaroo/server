@@ -5,6 +5,9 @@ defmodule Mangaroo.Concept.Content.Event.ChapterCreated do
   defstruct [
     :chapter_uuid,
     :manga_id,
-    :name
+    :name,
+    :chapter_archive_content_type,
+    :chapter_archive_filename,
+    :chapter_archive_path
   ]
 end

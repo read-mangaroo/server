@@ -10,7 +10,12 @@ defmodule Mangaroo.Concept.Content.Mutation.ChapterTest do
 
       attrs = %{
         name: "Test Chapter Name",
-        manga_id: manga.id
+        manga_id: manga.id,
+        chapter_archive: %Plug.Upload{
+          content_type: "application/zip",
+          path: Path.expand("../../../../fixtures/test\ chapter.zip", __DIR__),
+          filename: "test\ chapter.zip"
+        }
       }
 
       {:ok, %Chapter{} = chapter} = ChapterMutation.create(attrs)
@@ -19,14 +24,16 @@ defmodule Mangaroo.Concept.Content.Mutation.ChapterTest do
       assert chapter.uuid
       assert chapter.name == "Test Chapter Name"
       assert chapter.manga_id == manga.id
+      assert chapter.status == "pending"
     end
 
     test "with blank data returns errors" do
       {:error, %Ecto.Changeset{} = changeset} = ChapterMutation.create(%{})
 
-      assert Enum.count(changeset.errors) == 2
+      assert Enum.count(changeset.errors) == 3
       assert changeset.errors[:manga_id] == {"can't be blank", [validation: :required]}
       assert changeset.errors[:name] == {"can't be blank", [validation: :required]}
+      assert changeset.errors[:chapter_archive] == {"can't be blank", [validation: :required]}
     end
   end
 end

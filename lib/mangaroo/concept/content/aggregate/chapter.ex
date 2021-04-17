@@ -8,14 +8,22 @@ defmodule Mangaroo.Concept.Content.Aggregate.Chapter do
   defstruct [
     :chapter_uuid,
     :manga_id,
-    :name
+    :name,
+    :chapter_archive_content_type,
+    :chapter_archive_filename,
+    :chapter_archive_path
   ]
 
   def execute(%Chapter{}, %CreateChapter{} = command) do
+    {%Plug.Upload{} = chapter_archive, _} = command.chapter_archive
+
     %ChapterCreated{
       chapter_uuid: command.chapter_uuid,
       manga_id: command.manga_id,
-      name: command.name
+      name: command.name,
+      chapter_archive_content_type: chapter_archive.content_type,
+      chapter_archive_filename: chapter_archive.filename,
+      chapter_archive_path: chapter_archive.path
     }
   end
 
@@ -24,7 +32,10 @@ defmodule Mangaroo.Concept.Content.Aggregate.Chapter do
       chapter
       | chapter_uuid: event.chapter_uuid,
         manga_id: event.manga_id,
-        name: event.name
+        name: event.name,
+        chapter_archive_content_type: event.chapter_archive_content_type,
+        chapter_archive_filename: event.chapter_archive_filename,
+        chapter_archive_path: event.chapter_archive_path
     }
   end
 end
