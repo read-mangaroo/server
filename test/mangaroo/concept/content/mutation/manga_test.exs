@@ -45,9 +45,14 @@ defmodule Mangaroo.Concept.Content.Mutation.MangaTest do
 
       {:ok, %Manga{} = manga} = MangaMutation.create(attrs)
 
-      assert manga.id
-      assert manga.uuid
-      assert manga.name == "Test Manga Name"
+      wait_for_event(Mangaroo.Commanded, Mangaroo.Concept.Content.Event.MangaCreated, fn _ ->
+        assert_enqueued(worker: Mangaroo.Worker.Uploader)
+
+        Oban.drain_queue(queue: :media)
+        assert manga.id
+        assert manga.uuid
+        assert manga.name == "Test Manga Name"
+      end)
     end
 
     test "with blank data returns errors" do

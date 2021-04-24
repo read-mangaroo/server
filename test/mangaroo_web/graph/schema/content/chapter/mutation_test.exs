@@ -43,6 +43,7 @@ defmodule MangarooWeb.Graph.Schema.Content.Chapter.MutationTest do
         )
         |> json_response(200)
 
+      assert Oban.drain_queue(queue: :media) == %{success: 1, failure: 0}
       assert response["data"]["createChapter"]["id"]
       assert response["data"]["createChapter"]["mangaId"] == "#{manga.id}"
       assert response["data"]["createChapter"]["name"] == "Test Chapter Name"

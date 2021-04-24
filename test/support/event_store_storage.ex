@@ -3,12 +3,8 @@ defmodule Mangaroo.EventStoreStorage do
   Reset the event store and read store databases.
   """
   def reset! do
-    :ok = Application.stop(:mangaroo)
-
     reset_eventstore!()
     reset_readstore!()
-
-    {:ok, _} = Application.ensure_all_started(:mangaroo)
   end
 
   defp reset_eventstore! do
@@ -33,8 +29,10 @@ defmodule Mangaroo.EventStoreStorage do
     TRUNCATE TABLE
       chapters,
       manga,
+      oban_jobs,
       projection_versions
-    RESTART IDENTITY;
+    RESTART IDENTITY
+    CASCADE;
     """
   end
 end

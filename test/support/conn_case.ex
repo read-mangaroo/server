@@ -19,12 +19,15 @@ defmodule MangarooWeb.ConnCase do
 
   using do
     quote do
+      use Oban.Testing, repo: Mangaroo.Repo
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import MangarooWeb.ConnCase
       import MangarooWeb.AbsintheHelpers
       import Mangaroo.Factories
+      import Commanded.Assertions.EventAssertions
 
       alias MangarooWeb.Router.Helpers, as: Routes
 
@@ -34,7 +37,13 @@ defmodule MangarooWeb.ConnCase do
   end
 
   setup _tags do
-    Mangaroo.EventStoreStorage.reset!()
+    {:ok, _} = Application.ensure_all_started(:mangaroo)
+
+    on_exit(fn ->
+      :ok = Application.stop(:mangaroo)
+
+      Mangaroo.EventStoreStorage.reset!()
+    end)
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

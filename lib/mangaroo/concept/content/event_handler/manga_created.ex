@@ -9,7 +9,7 @@ defmodule Mangaroo.Concept.Content.EventHandler.MangaCreated do
     name: __MODULE__
 
   alias Mangaroo.Concept.Content.Event.MangaCreated
-  alias Mangaroo.Uploaders.CoverArt, as: CoverArtUploader
+  alias Mangaroo.Worker.Uploader, as: UploadWorker
 
   def handle(
         %MangaCreated{
@@ -21,54 +21,22 @@ defmodule Mangaroo.Concept.Content.EventHandler.MangaCreated do
         _metadata
       ) do
     if content_type && filename && path do
-      do_store_cover_art(
-        Application.get_env(:mangaroo, :environment),
-        id,
-        content_type,
-        filename,
-        path
-      )
+      File.mkdir_p!(Path.expand("tmp/upload_cache"))
+      tmp_path = Path.expand("tmp/upload_cache/#{filename}")
+      File.cp!(path, Path.expand(tmp_path))
+
+      %{
+        env: Application.get_env(:mangaroo, :environment) |> Atom.to_string(),
+        type: "cover_art",
+        id: id,
+        content_type: content_type,
+        filename: filename,
+        path: tmp_path
+      }
+      |> UploadWorker.new()
+      |> Oban.insert()
     else
       :ok
-    end
-  end
-
-  defp do_store_cover_art(:prod, id, content_type, filename, path) do
-    # coveralls-ignore-start
-    File.mkdir_p!(Path.expand("tmp/multipart_cache"))
-    tmp_path = Path.expand("tmp/multipart_cache/#{filename}")
-    File.cp!(path, Path.expand(tmp_path))
-
-    cover_art = %Plug.Upload{
-      content_type: content_type,
-      filename: filename,
-      path: tmp_path
-    }
-
-    case CoverArtUploader.store({cover_art, %{id: id}}) do
-      {:ok, _} ->
-        File.rm!(tmp_path)
-
-      {:error, _} ->
-        :error
-    end
-
-    # coveralls-ignore-stop
-  end
-
-  defp do_store_cover_art(_env, id, content_type, filename, path) do
-    cover_art = %Plug.Upload{
-      content_type: content_type,
-      filename: filename,
-      path: path
-    }
-
-    case CoverArtUploader.store({cover_art, %{id: id}}) do
-      {:ok, _} ->
-        :ok
-
-      {:error, _} ->
-        :error
     end
   end
 end
