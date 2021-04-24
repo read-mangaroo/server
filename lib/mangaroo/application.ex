@@ -12,6 +12,7 @@ defmodule Mangaroo.Application do
       Mangaroo.Repo,
       MangarooWeb.Telemetry,
       MangarooWeb.Endpoint,
+      {Oban, oban_config()},
       {Phoenix.PubSub, name: Mangaroo.PubSub}
     ]
 
@@ -26,5 +27,9 @@ defmodule Mangaroo.Application do
   def config_change(changed, _new, removed) do
     MangarooWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  def oban_config do
+    Application.fetch_env!(:mangaroo, Oban)
   end
 end

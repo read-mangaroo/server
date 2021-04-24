@@ -20,6 +20,7 @@ defmodule Mangaroo.Concept.Content.Mutation.ChapterTest do
 
       {:ok, %Chapter{} = chapter} = ChapterMutation.create(attrs)
 
+      assert Oban.drain_queue(queue: :media) == %{success: 1, failure: 0}
       assert chapter.id
       assert chapter.uuid
       assert chapter.name == "Test Chapter Name"

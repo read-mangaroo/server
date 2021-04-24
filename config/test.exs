@@ -32,3 +32,7 @@ config :mangaroo, MangarooWeb.Endpoint,
 config :logger, level: :warn
 
 config :mangaroo, cors_origin: "http://localhost:3000"
+
+config :mangaroo, Oban,
+  queues: false,
+  plugins: false

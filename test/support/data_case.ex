@@ -18,6 +18,8 @@ defmodule Mangaroo.DataCase do
 
   using do
     quote do
+      use Oban.Testing, repo: Mangaroo.Repo
+
       alias Mangaroo.Repo
 
       import Ecto
@@ -25,11 +27,18 @@ defmodule Mangaroo.DataCase do
       import Ecto.Query
       import Mangaroo.DataCase
       import Mangaroo.Factories
+      import Commanded.Assertions.EventAssertions
     end
   end
 
-  setup _tags do
-    Mangaroo.EventStoreStorage.reset!()
+  setup do
+    {:ok, _} = Application.ensure_all_started(:mangaroo)
+
+    on_exit(fn ->
+      :ok = Application.stop(:mangaroo)
+
+      Mangaroo.EventStoreStorage.reset!()
+    end)
 
     :ok
   end
